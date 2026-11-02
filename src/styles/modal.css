@@ -1,0 +1,9 @@
+.modal { position: fixed; inset: 0; z-index: 100; background: rgba(74, 52, 41, .55); display: grid; place-items: center; padding: 1rem; animation: fade .2s ease; }
+.modal__panel { position: relative; background: var(--cream); border-radius: 28px; width: min(760px, 100%); max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 60px rgba(0, 0, 0, .3); animation: pop .25s ease; }
+.modal__close { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--brown); display: grid; place-items: center; box-shadow: var(--shadow); }
+.modal__img { width: 100%; max-height: 360px; object-fit: cover; object-position: top left; background: #fff; border-radius: 28px 28px 0 0; }
+.modal__body { padding: 1.75rem; }
+.modal__body h3 { font-size: 2rem; }
+.modal__details { display: grid; gap: .7rem; margin: 1.25rem 0 1.5rem; }
+@keyframes fade { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.98); } }
