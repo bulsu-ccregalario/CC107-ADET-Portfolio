@@ -1,9 +1,22 @@
-.modal { position: fixed; inset: 0; z-index: 100; background: rgba(74, 52, 41, .55); display: grid; place-items: center; padding: 1rem; animation: fade .2s ease; }
-.modal__panel { position: relative; background: var(--cream); border-radius: 28px; width: min(760px, 100%); max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 60px rgba(0, 0, 0, .3); animation: pop .25s ease; }
-.modal__close { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--brown); display: grid; place-items: center; box-shadow: var(--shadow); }
+.modal { position: fixed; inset: 0; z-index: 100; background: rgba(74, 52, 41, .55); display: grid; place-items: center; padding: 1rem; animation: fade .25s ease both; }
+.modal.is-closing { animation: fade-out .22s ease both; }
+.modal.is-closing .modal__panel { animation: pop-out .22s ease both; }
+.modal__panel { position: relative; background: var(--cream); border-radius: 28px; width: min(760px, 100%); max-height: 92vh; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; box-shadow: 0 24px 60px rgba(0, 0, 0, .3); animation: pop .3s cubic-bezier(.2, .7, .2, 1) both; }
+.modal__close { transition: transform .25s ease; position: absolute; z-index: 2; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--brown); display: grid; place-items: center; box-shadow: var(--shadow); }
 .modal__img { width: 100%; max-height: 360px; object-fit: cover; object-position: top left; background: #fff; border-radius: 28px 28px 0 0; }
 .modal__body { padding: 1.75rem; }
 .modal__body h3 { font-size: 2rem; }
-.modal__details { display: grid; gap: .7rem; margin: 1.25rem 0 1.5rem; }
+.modal__details { display: grid; gap: .7rem; margin: 1.25rem 0 0; }
+.modal__details + .btn { margin-top: 1.5rem; }
+.modal__body > :last-child { margin-bottom: 0; }
+@media (max-width: 560px) {
+  .modal { padding: .6rem; }
+  .modal__img { max-height: 220px; }
+  .modal__body { padding: 1.25rem; }
+  .modal__body h3 { font-size: 1.6rem; }
+}
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes pop-out { to { opacity: 0; transform: translateY(10px) scale(.98); } }
+.modal__close:hover { transform: rotate(90deg) scale(1.08); }
 @keyframes fade { from { opacity: 0; } }
 @keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.98); } }

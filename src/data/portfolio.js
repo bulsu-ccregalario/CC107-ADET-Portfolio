@@ -68,9 +68,6 @@ export const skillGroups = [
 
 const placeholders = {
   type: 'Academic group project',
-  role: '[Add your role in the team]',
-  tech: '[Add the technologies used]',
-  features: '[Add key features you can verify]',
 }
 
 export const projects = [

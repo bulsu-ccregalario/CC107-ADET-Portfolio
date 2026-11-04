@@ -8,7 +8,7 @@
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; font-family: var(--sans); color: var(--ink); background: var(--cream); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { margin: 0; overflow-x: clip; font-family: var(--sans); color: var(--ink); background: var(--cream); line-height: 1.7; -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 h1, h2, h3 { font-family: var(--serif); color: var(--brown); line-height: 1.15; margin: 0 0 .5em; font-weight: 500; }
@@ -16,7 +16,6 @@ p { margin: 0 0 1em; }
 ul { list-style: none; padding: 0; margin: 0; }
 button { font: inherit; cursor: pointer; }
 :focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
 
 .container { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
 .section { padding: 6rem 0; scroll-margin-top: var(--nav-h); position: relative; overflow: hidden; }
@@ -33,10 +32,57 @@ button { font: inherit; cursor: pointer; }
 .pill { display: inline-block; border: 1.5px solid var(--brown); border-radius: 999px; padding: .45rem 1.4rem; margin: 0; color: var(--brown); font-weight: 500; }
 .pill--mint { background: var(--mint-deep); }
 .pill--blush { background: var(--blush); }
-.btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .75rem 1.6rem; font-weight: 600; text-decoration: none; border: 2px solid var(--forest); transition: transform .2s, box-shadow .2s, background .2s; }
-.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .75rem 1.6rem; font-weight: 600; text-decoration: none; border: 2px solid var(--forest); transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease; }
+.btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow); }
+.btn:active { transform: translateY(-1px) scale(.99); }
+.btn--forest:hover { background: #264c39; }
 .btn--forest { background: var(--forest); color: #fff; }
 .btn--ghost { background: transparent; color: var(--forest); }
 .btn--ghost:hover { background: #fff; }
 .footer { background: var(--forest); color: var(--cream); text-align: center; padding: 1.75rem 1rem; }
 .footer p { margin: 0; font-size: .95rem; }
+
+/* ---------- Decorative flowers ---------- */
+/* Individual transform properties (translate / rotate / scale) are animated so they never clash with layout transforms. */
+.flower { pointer-events: none; user-select: none; transform-origin: 50% 50%; will-change: translate, rotate, scale; }
+.flower--float { animation: flower-drift-a var(--f-dur, 9s) ease-in-out var(--f-delay, 0s) infinite; }
+.flower--b { animation-name: flower-drift-b; }
+.flower--c { animation-name: flower-drift-c; }
+@keyframes flower-drift-a {
+  0%, 100% { translate: 0 0; rotate: -6deg; scale: 1; }
+  25% { translate: var(--f-sway, 12px) calc(var(--f-amp, 10px) * -.6); rotate: 2deg; scale: 1.04; }
+  50% { translate: calc(var(--f-sway, 12px) * .3) calc(var(--f-amp, 10px) * -1); rotate: 9deg; scale: 1.08; }
+  75% { translate: calc(var(--f-sway, 12px) * -.8) calc(var(--f-amp, 10px) * -.35); rotate: 1deg; scale: 1.03; }
+}
+@keyframes flower-drift-b {
+  0%, 100% { translate: 0 0; rotate: 5deg; scale: 1.02; }
+  30% { translate: calc(var(--f-sway, 12px) * -1) calc(var(--f-amp, 10px) * -.7); rotate: -4deg; scale: 1; }
+  60% { translate: calc(var(--f-sway, 12px) * .6) calc(var(--f-amp, 10px) * -1); rotate: -10deg; scale: 1.07; }
+  80% { translate: calc(var(--f-sway, 12px) * .9) calc(var(--f-amp, 10px) * -.3); rotate: -2deg; scale: 1.04; }
+}
+@keyframes flower-drift-c {
+  0%, 100% { translate: 0 0; rotate: 0deg; scale: 1; }
+  20% { translate: calc(var(--f-sway, 12px) * .7) calc(var(--f-amp, 10px) * .4); rotate: 6deg; scale: 1.05; }
+  55% { translate: calc(var(--f-sway, 12px) * -.6) calc(var(--f-amp, 10px) * -1); rotate: -7deg; scale: 1.09; }
+  80% { translate: calc(var(--f-sway, 12px) * -.2) calc(var(--f-amp, 10px) * -.4); rotate: 3deg; scale: 1.02; }
+}
+.section__flower { position: absolute; z-index: 0; opacity: .85; }
+.section__flower--tl { top: 16px; left: 4%; }
+.section__flower--tr { top: 16px; right: 4%; }
+.section__flower--bl { bottom: 14px; left: 4%; }
+.section__flower--br { bottom: 14px; right: 4%; }
+.section__flower--skills { top: 28px; right: 5%; }
+.section__flower--contact { bottom: 28px; right: 6%; }
+.section > .container { position: relative; z-index: 1; }
+
+/* ---------- Scroll reveal (runs once per element) ---------- */
+.reveal { opacity: 0; translate: 0 28px; transition: opacity .7s ease var(--reveal-delay, 0ms), translate .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms); }
+.reveal.is-visible { opacity: 1; translate: 0 0; }
+.reveal--fill > * { height: 100%; }
+
+/* ---------- Reduced motion: no movement, content always visible ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; translate: none; }
+}
