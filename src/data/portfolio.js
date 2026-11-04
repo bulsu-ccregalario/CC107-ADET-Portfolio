@@ -1,4 +1,8 @@
+
 // Edit this file to update the content of the whole site.
+
+const base = import.meta.env.BASE_URL
+
 export const profile = {
   name: 'Casey Regalario',
   age: 20,
@@ -11,13 +15,17 @@ export const profile = {
   github: 'https://github.com/kashew-05',
   githubLabel: 'github.com/kashew-05',
   goal: 'Frontend Developer',
-  photoFormal: '/images/casey-formal.jpg',
-  photoBookstore: '/images/casey-bookstore.png',
+
+  // Profile images
+  photoFormal: `${base}images/casey-formal.jpg`,
+  photoBookstore: `${base}images/casey-bookstore.png`,
+
   bio: [
     'Hi, I’m Casey, a 20-year-old third-year BS Information Technology student at Bulacan State University, specializing in Web and Mobile Application Development.',
     'I’m creative, introverted, adaptable, and always willing to learn. I enjoy turning ideas into interfaces that are both easy to use and nice to look at.',
     'My goal is to grow into a frontend developer who builds thoughtful, well-designed web experiences.',
   ],
+
   interests: ['Arts', 'Animals', 'Crafts'],
   traits: ['Creative', 'Introverted', 'Adaptable', 'Willing to learn'],
 }
@@ -32,10 +40,30 @@ export const navLinks = [
 ]
 
 export const skillGroups = [
-  { title: 'Frontend', icon: 'code', color: 'mint', items: ['HTML', 'CSS', 'JavaScript'] },
-  { title: 'Backend & Data', icon: 'database', color: 'blush', items: ['PHP', 'MySQL', 'Firebase'] },
-  { title: 'Mobile & Languages', icon: 'phone', color: 'yellow', items: ['Flutter', 'Java'] },
-  { title: 'Design & Tools', icon: 'palette', color: 'cream', items: ['Figma', 'Visual Studio Code'] },
+  {
+    title: 'Frontend',
+    icon: 'code',
+    color: 'mint',
+    items: ['HTML', 'CSS', 'JavaScript'],
+  },
+  {
+    title: 'Backend & Data',
+    icon: 'database',
+    color: 'blush',
+    items: ['PHP', 'MySQL', 'Firebase'],
+  },
+  {
+    title: 'Mobile & Languages',
+    icon: 'phone',
+    color: 'yellow',
+    items: ['Flutter', 'Java'],
+  },
+  {
+    title: 'Design & Tools',
+    icon: 'palette',
+    color: 'cream',
+    items: ['Figma', 'Visual Studio Code'],
+  },
 ]
 
 const placeholders = {
@@ -50,7 +78,7 @@ export const projects = [
     id: 'pacx',
     name: 'PACX CoopSurvey',
     subtitle: 'Cooperative Survey Management System',
-    image: '/images/pacx-coopsurvey.png',
+    image: `${base}images/pacx-coopsurvey.png`,
     short: 'A web-based system for cooperative members to access surveys, participate in questionnaires, and manage survey-related information.',
     description: 'A web-based system for cooperative members to access surveys, participate in questionnaires, and manage survey-related information.',
     ...placeholders,
@@ -60,7 +88,7 @@ export const projects = [
     id: 'lynx',
     name: 'LYNX Clothing Apparel',
     subtitle: 'Clothing and Apparel Website',
-    image: '/images/lynx-clothing.png',
+    image: `${base}images/lynx-clothing.png`,
     short: 'A fashion-oriented website showcasing clothing products through an online storefront.',
     description: 'A fashion-oriented website showcasing clothing products through an online storefront.',
     ...placeholders,
@@ -70,7 +98,7 @@ export const projects = [
     id: 'luba',
     name: 'LUBACanFindIT',
     subtitle: 'Road Pothole Reporting and Monitoring System for LGUs',
-    image: '/images/lubacanfindit.png',
+    image: `${base}images/lubacanfindit.png`,
     short: 'A web-based system designed to help LGUs manage road reports, monitor pothole incidents, and track road repair operations.',
     description: 'A web-based system designed to help Local Government Units manage road reports, monitor pothole incidents, and track road repair operations.',
     ...placeholders,
